@@ -2,9 +2,11 @@ package game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import game.input.KeyHandler;
-import game.panel.GameConfig;
+import game.config.GameConfig;
+import game.util.UtilityTool;
 
 public class Player extends Entity {
 
@@ -17,6 +19,8 @@ public class Player extends Entity {
     private int velocityY = 0;
 
     private boolean onGround = true;
+
+    private BufferedImage sprite;
 
     // ===============================
     // CONSTRUCTOR
@@ -35,6 +39,8 @@ public class Player extends Entity {
         setHeight(GameConfig.PLAYER_HEIGHT);
 
         setSpeed(GameConfig.PLAYER_SPEED);
+
+        loadImage();
 
     }
 
@@ -110,15 +116,25 @@ public class Player extends Entity {
 
     }
 
+     // ===============================
+    // GAMBAR PLAYER
+    // ===============================
+    private void loadImage() {
+
+        sprite = UtilityTool.loadImage(
+        "assets/images/player/player_idle.png");
+
+    }
+
     // ===============================
     // DRAW
     // ===============================
 
     public void draw(Graphics g) {
 
-        g.setColor(Color.BLACK);
+        g.drawImage(
 
-        g.fillRect(
+                sprite,
 
                 getX(),
 
@@ -126,7 +142,9 @@ public class Player extends Entity {
 
                 getWidth(),
 
-                getHeight()
+                getHeight(),
+
+                null
 
         );
 

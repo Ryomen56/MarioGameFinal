@@ -2,6 +2,7 @@ package game.panel;
 
 import game.entity.Player;
 import game.input.KeyHandler;
+import game.config.GameConfig;
 
 import java.awt.Color;
 import java.awt.Dimension;

@@ -1,4 +1,4 @@
-package game.panel;
+package game.config;
 
 /**
  * Seluruh konfigurasi game.

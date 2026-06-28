@@ -1,38 +1,53 @@
 package game.entity;
 
+import game.input.KeyHandler;
+
 /**
- * Class Player.
- * Player mewarisi semua atribut dari Entity.
+ * Player mewarisi Entity.
  */
 public class Player extends Entity {
 
-    // ===========================
+    // ===============================
+    // INPUT
+    // ===============================
+
+    private KeyHandler keyHandler;
+
+    // ===============================
     // CONSTRUCTOR
-    // ===========================
+    // ===============================
 
-    public Player() {
+    public Player(KeyHandler keyHandler) {
 
-        // Posisi awal player
+        this.keyHandler = keyHandler;
+
         setX(100);
         setY(200);
 
-        // Ukuran player
         setWidth(48);
         setHeight(48);
 
-        // Kecepatan player
         setSpeed(4);
 
     }
 
-    // ===========================
+    // ===============================
     // UPDATE PLAYER
-    // ===========================
+    // ===============================
 
     public void update() {
 
-        // Belum ada logika.
-        // Nanti keyboard akan diproses di BAB berikutnya.
+        if (keyHandler.leftPressed) {
+
+            setX(getX() - getSpeed());
+
+        }
+
+        if (keyHandler.rightPressed) {
+
+            setX(getX() + getSpeed());
+
+        }
 
     }
 

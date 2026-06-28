@@ -1,6 +1,7 @@
 package game.panel;
 
 import game.entity.Player;
+import game.input.KeyHandler;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private Player player;
+    private KeyHandler keyHandler;
 
     // ===============================
     // CONSTRUCTOR
@@ -41,7 +43,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         setFocusable(true);
 
-        player = new Player();
+        keyHandler = new KeyHandler();
+
+        addKeyListener(keyHandler);
+
+        player = new Player(keyHandler);
 
     }
 

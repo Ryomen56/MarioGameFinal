@@ -3,21 +3,20 @@ package game.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- * Bertugas membaca input keyboard.
- * Class ini TIDAK menggerakkan Player.
- */
 public class KeyHandler implements KeyListener {
 
     // ===============================
-    // STATUS TOMBOL
+    // ATTRIBUTE
     // ===============================
 
     public boolean leftPressed;
+
     public boolean rightPressed;
 
+    public boolean jumpPressed;
+
     // ===============================
-    // TIDAK DIGUNAKAN
+    // KEY TYPED
     // ===============================
 
     @Override
@@ -26,7 +25,7 @@ public class KeyHandler implements KeyListener {
     }
 
     // ===============================
-    // TOMBOL DITEKAN
+    // KEY PRESSED
     // ===============================
 
     @Override
@@ -34,22 +33,32 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_A) {
+        switch (code) {
 
-            leftPressed = true;
+            case KeyEvent.VK_A:
 
-        }
+                leftPressed = true;
 
-        if (code == KeyEvent.VK_D) {
+                break;
 
-            rightPressed = true;
+            case KeyEvent.VK_D:
+
+                rightPressed = true;
+
+                break;
+
+            case KeyEvent.VK_SPACE:
+
+                jumpPressed = true;
+
+                break;
 
         }
 
     }
 
     // ===============================
-    // TOMBOL DILEPAS
+    // KEY RELEASED
     // ===============================
 
     @Override
@@ -57,15 +66,25 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_A) {
+        switch (code) {
 
-            leftPressed = false;
+            case KeyEvent.VK_A:
 
-        }
+                leftPressed = false;
 
-        if (code == KeyEvent.VK_D) {
+                break;
 
-            rightPressed = false;
+            case KeyEvent.VK_D:
+
+                rightPressed = false;
+
+                break;
+
+            case KeyEvent.VK_SPACE:
+
+                jumpPressed = false;
+
+                break;
 
         }
 

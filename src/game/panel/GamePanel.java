@@ -116,23 +116,13 @@ public class GamePanel extends JPanel implements Runnable {
     // ===============================
 
     @Override
-    protected void paintComponent(Graphics g){
+        protected void paintComponent(Graphics g) {
 
-        super.paintComponent(g);
+            super.paintComponent(g);
 
-        g.setColor(Color.BLACK);
+            player.draw(g);
 
-        g.fillRect(
-
-                player.getX(),
-
-                player.getY(),
-
-                player.getWidth(),
-
-                player.getHeight()
-
-            );
+            g.dispose();
 
         }
 

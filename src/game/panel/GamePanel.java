@@ -1,5 +1,7 @@
 package game.panel;
 
+import game.entity.Player;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,12 +19,13 @@ public class GamePanel extends JPanel implements Runnable {
     // ===============================
 
     private Thread gameThread;
+    private Player player;
 
     // ===============================
     // CONSTRUCTOR
     // ===============================
 
-    public GamePanel() {
+    public GamePanel(){
 
         setPreferredSize(
 
@@ -37,6 +40,8 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
 
         setFocusable(true);
+
+        player = new Player();
 
     }
 
@@ -96,6 +101,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
 
+        player.update();
+        
     }
 
     // ===============================
@@ -107,6 +114,20 @@ public class GamePanel extends JPanel implements Runnable {
 
         super.paintComponent(g);
 
-    }
+        g.setColor(Color.BLACK);
+
+        g.fillRect(
+
+                player.getX(),
+
+                player.getY(),
+
+                player.getWidth(),
+
+                player.getHeight()
+
+            );
+
+        }
 
 }

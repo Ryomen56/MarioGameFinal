@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.input.KeyHandler;
+import game.panel.GameConfig;
 
 public class Player extends Entity {
 
@@ -14,12 +15,6 @@ public class Player extends Entity {
     private final KeyHandler keyHandler;
 
     private int velocityY = 0;
-
-    private final int gravity = 1;
-
-    private final int jumpPower = -16;
-
-    private final int groundY = 200;
 
     private boolean onGround = true;
 
@@ -33,13 +28,13 @@ public class Player extends Entity {
 
         setX(100);
 
-        setY(groundY);
+        setY(GameConfig.GROUND_Y);
 
-        setWidth(48);
+        setWidth(GameConfig.PLAYER_WIDTH);
 
-        setHeight(48);
+        setHeight(GameConfig.PLAYER_HEIGHT);
 
-        setSpeed(4);
+        setSpeed(GameConfig.PLAYER_SPEED);
 
     }
 
@@ -85,7 +80,7 @@ public class Player extends Entity {
 
         if (keyHandler.jumpPressed && onGround) {
 
-            velocityY = jumpPower;
+            velocityY = GameConfig.JUMP_POWER;
 
             onGround = false;
 
@@ -99,13 +94,13 @@ public class Player extends Entity {
 
     private void gravity() {
 
-        velocityY += gravity;
+        velocityY += GameConfig.GRAVITY;
 
         setY(getY() + velocityY);
 
-        if (getY() >= groundY) {
+        if (getY() >= GameConfig.GROUND_Y) {
 
-            setY(groundY);
+            setY(GameConfig.GROUND_Y);
 
             velocityY = 0;
 

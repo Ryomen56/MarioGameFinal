@@ -1,11 +1,15 @@
 package game.panel;
 
 /**
- * Menyimpan seluruh konfigurasi game.
- * Jika suatu hari ukuran game berubah,
- * cukup ubah di file ini.
+ * Seluruh konfigurasi game.
+ * Jika ingin mengubah ukuran layar,
+ * gravitasi, kecepatan player,
+ * cukup ubah file ini.
  */
-public class GameConfig {
+public final class GameConfig {
+
+    private GameConfig() {
+    }
 
     // ===============================
     // TILE
@@ -37,5 +41,29 @@ public class GameConfig {
     // ===============================
 
     public static final int FPS = 60;
+
+    // ===============================
+    // PLAYER
+    // ===============================
+
+    public static final int PLAYER_WIDTH = TILE_SIZE;
+
+    public static final int PLAYER_HEIGHT = TILE_SIZE;
+
+    public static final int PLAYER_SPEED = 4;
+
+    // ===============================
+    // PHYSICS
+    // ===============================
+
+    public static final int GRAVITY = 1;
+
+    public static final int JUMP_POWER = -16;
+
+    // ===============================
+    // GROUND
+    // ===============================
+
+    public static final int GROUND_Y = 200;
 
 }

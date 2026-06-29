@@ -17,6 +17,10 @@ public class TileManager {
 
     private final GamePanel gamePanel;
 
+    private final int[][] map =
+        new int[GameConfig.MAX_SCREEN_ROW]
+               [GameConfig.MAX_SCREEN_COL];
+
     // ==========================================
     // CONSTRUCTOR
     // ==========================================
@@ -24,6 +28,8 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
 
         this.gamePanel = gamePanel;
+
+        loadMap();
 
     }
 
@@ -33,23 +39,104 @@ public class TileManager {
 
     public void draw(Graphics g) {
 
-        for (int column = 0; column < GameConfig.MAX_SCREEN_COL; column++) {
+        for(int row = 0;
+                row < GameConfig.MAX_SCREEN_ROW;
+                row++){
 
-            g.drawImage(
+            for(int column = 0;
+                    column < GameConfig.MAX_SCREEN_COL;
+                    column++){
 
-                    AssetManager.getGroundTile().getImage(),
+                int tile = map[row][column];
 
-                    column * GameConfig.TILE_SIZE,
+                if(tile == 1){
 
-                    GameConfig.GROUND_Y + GameConfig.TILE_SIZE,
+                    g.drawImage(
 
-                    GameConfig.TILE_SIZE,
+                            AssetManager
+                            .getGroundTile()
+                            .getImage(),
 
-                    GameConfig.TILE_SIZE,
+                            column * GameConfig.TILE_SIZE,
 
-                    null
+                            row * GameConfig.TILE_SIZE,
 
-            );
+                            GameConfig.TILE_SIZE,
+
+                            GameConfig.TILE_SIZE,
+
+                            null);
+
+                }
+
+                if(tile == 2){
+
+                    g.drawImage(
+
+                            AssetManager
+                            .getGroundTile()
+                            .getImage(),
+
+                            column * GameConfig.TILE_SIZE,
+
+                            row * GameConfig.TILE_SIZE,
+
+                            GameConfig.TILE_SIZE,
+
+                            GameConfig.TILE_SIZE,
+
+                            null);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    // ==========================================
+    // LOAD MAP
+    // ==========================================
+
+    private void loadMap() {
+
+        try {
+
+            java.io.File file =
+                    new java.io.File("assets/maps/world01.txt");
+
+            java.util.Scanner scanner =
+                    new java.util.Scanner(file);
+
+            int row = 0;
+
+            while(scanner.hasNextLine()){
+
+                String line = scanner.nextLine();
+
+                String[] numbers = line.split(" ");
+
+                for(int column = 0;
+                        column < numbers.length;
+                        column++){
+
+                    map[row][column] =
+                            Integer.parseInt(numbers[column]);
+
+                }
+
+                row++;
+
+            }
+
+            scanner.close();
+
+        }
+
+        catch(Exception e){
+
+            e.printStackTrace();
 
         }
 

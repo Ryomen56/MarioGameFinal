@@ -3,13 +3,7 @@ package game.tile;
 import java.awt.image.BufferedImage;
 
 /**
- * Merepresentasikan satu jenis tile dalam game.
- *
- * Contoh:
- * - Ground
- * - Brick
- * - Pipe
- * - Cloud
+ * Menyimpan informasi setiap tile.
  */
 public class Tile {
 
@@ -17,23 +11,9 @@ public class Tile {
     // ATTRIBUTE
     // ==========================================
 
-    /**
-     * Gambar tile.
-     */
     private BufferedImage image;
 
-    /**
-     * Apakah tile dapat ditabrak.
-     */
     private boolean collision;
-
-    // ==========================================
-    // CONSTRUCTOR
-    // ==========================================
-
-    public Tile() {
-
-    }
 
     // ==========================================
     // GETTER

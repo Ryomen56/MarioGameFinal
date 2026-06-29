@@ -83,25 +83,20 @@ public class TileManager {
 
     private void loadMap() {
 
-        try {
-
-            java.io.File file =
-                    new java.io.File("assets/maps/world01.txt");
-
-            java.util.Scanner scanner =
-                    new java.util.Scanner(file);
+        try (java.util.Scanner scanner =
+                new java.util.Scanner(
+                        new java.io.File("assets/maps/world01.txt"))) {
 
             int row = 0;
 
-            while(scanner.hasNextLine()){
+            while (scanner.hasNextLine() && row < GameConfig.MAX_SCREEN_ROW) {
 
-                String line = scanner.nextLine();
+                String[] numbers = scanner.nextLine().trim().split("\\s+");
 
-                String[] numbers = line.split(" ");
-
-                for(int column = 0;
-                        column < numbers.length;
-                        column++){
+                for (int column = 0;
+                        column < GameConfig.MAX_SCREEN_COL
+                        && column < numbers.length;
+                        column++) {
 
                     map[row][column] =
                             Integer.parseInt(numbers[column]);
@@ -112,11 +107,9 @@ public class TileManager {
 
             }
 
-            scanner.close();
+        } catch (Exception e) {
 
-        }
-
-        catch(Exception e){
+            System.out.println("Gagal membaca world01.txt");
 
             e.printStackTrace();
 
@@ -137,6 +130,38 @@ public class TileManager {
     public int[][] getMap() {
 
         return map;
+
+    }
+
+    // ==========================================
+    // GET TILE NUMBER
+    // ==========================================
+
+    public int getTileNumber(int row, int column) {
+
+        if (row < 0 || row >= GameConfig.MAX_SCREEN_ROW) {
+
+            return 0;
+
+        }
+
+        if (column < 0 || column >= GameConfig.MAX_SCREEN_COL) {
+
+            return 0;
+
+        }
+
+        return map[row][column];
+
+    }
+
+    // ==========================================
+    // GET GAME PANEL
+    // ==========================================
+
+    public GamePanel getGamePanel() {
+
+        return gamePanel;
 
     }
 

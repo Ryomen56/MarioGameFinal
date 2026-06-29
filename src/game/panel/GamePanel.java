@@ -1,84 +1,64 @@
 package game.panel;
 
-import game.entity.Player;
-import game.input.KeyHandler;
-import game.collision.CollisionChecker;
-import game.config.GameConfig;
-import game.tile.TileManager;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-/**
- * Panel utama game.
- * Semua gambar nanti akan digambar di sini.
- */
+import game.config.GameConfig;
+import game.entity.Player;
+import game.input.KeyHandler;
+import game.tile.TileManager;
+
 public class GamePanel extends JPanel implements Runnable {
 
-    // ===============================
-    // THREAD GAME
-    // ===============================
+    // ==========================================
+    // ATTRIBUTE
+    // ==========================================
 
     private Thread gameThread;
-    private Player player;
-    private TileManager tileManager;
-    private CollisionChecker collisionChecker;
-    private KeyHandler keyHandler;
 
-    // ===============================
-    // GETTER
-    // ===============================
+    private final KeyHandler keyHandler;
 
-    public CollisionChecker getCollisionChecker(){
+    private final Player player;
 
-    return collisionChecker;
+    private final TileManager tileManager;
 
-    }
-
-    public TileManager getTileManager(){
-
-        return tileManager;
-
-    }
-
-    // ===============================
+    // ==========================================
     // CONSTRUCTOR
-    // ===============================
+    // ==========================================
 
-    public GamePanel(){
+    public GamePanel() {
 
-        setPreferredSize(
+        // Ukuran Window
+        setPreferredSize(new Dimension(
+                GameConfig.SCREEN_WIDTH,
+                GameConfig.SCREEN_HEIGHT));
 
-                new Dimension(
-
-                        GameConfig.SCREEN_WIDTH,
-
-                        GameConfig.SCREEN_HEIGHT));
-
-        setBackground(new Color(92,148,252));
+        // Background
+        setBackground(new Color(92, 148, 252));
 
         setDoubleBuffered(true);
 
         setFocusable(true);
 
+        // Keyboard
         keyHandler = new KeyHandler();
 
         addKeyListener(keyHandler);
 
+        // Tile
         tileManager = new TileManager(this);
 
-        collisionChecker = new CollisionChecker(this);
-
+        // Player
         player = new Player(this, keyHandler);
 
     }
 
-    // ===============================
-    // MEMULAI GAME
-    // ===============================
+    // ==========================================
+    // START GAME
+    // ==========================================
 
     public void startGameThread() {
 
@@ -88,31 +68,28 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    // ===============================
+    // ==========================================
     // GAME LOOP
-    // ===============================
+    // ==========================================
 
     @Override
     public void run() {
 
-        double drawInterval =
-                1000000000.0 / GameConfig.FPS;
+        double drawInterval = 1000000000.0 / GameConfig.FPS;
 
         double delta = 0;
 
         long lastTime = System.nanoTime();
 
-        long currentTime;
+        while (gameThread != null) {
 
-        while(gameThread != null){
+            long currentTime = System.nanoTime();
 
-            currentTime = System.nanoTime();
-
-            delta += (currentTime-lastTime)/drawInterval;
+            delta += (currentTime - lastTime) / drawInterval;
 
             lastTime = currentTime;
 
-            if(delta >= 1){
+            if (delta >= 1) {
 
                 update();
 
@@ -126,38 +103,54 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    // ===============================
-    // UPDATE GAME
-    // ===============================
+    // ==========================================
+    // UPDATE
+    // ==========================================
 
-    public void update(){
+    public void update() {
 
         player.update();
-        
+
     }
 
-    // ===============================
-    // GAMBAR GAME
-    // ===============================
+    // ==========================================
+    // DRAW
+    // ==========================================
 
     @Override
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
-        // ==================================
-        // TILE
-        // ==================================
-
+        // Gambar Map
         tileManager.draw(g);
 
-        // ==================================
-        // PLAYER
-        // ==================================
-
+        // Gambar Player
         player.draw(g);
 
         g.dispose();
+
+    }
+
+    // ==========================================
+    // GETTER
+    // ==========================================
+
+    public Player getPlayer() {
+
+        return player;
+
+    }
+
+    public TileManager getTileManager() {
+
+        return tileManager;
+
+    }
+
+    public KeyHandler getKeyHandler() {
+
+        return keyHandler;
 
     }
 

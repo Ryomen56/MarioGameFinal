@@ -1,71 +1,65 @@
 package game.entity;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import game.config.GameConfig;
 import game.input.KeyHandler;
 import game.panel.GamePanel;
-import game.config.GameConfig;
 import game.util.AssetManager;
-import game.util.UtilityTool;
 
+/**
+ * Class Player.
+ */
 public class Player extends Entity {
 
-    // ===============================
+    // ==========================================
     // ATTRIBUTE
-    // ===============================
-
-    private final KeyHandler keyHandler;
+    // ==========================================
 
     private final GamePanel gamePanel;
+    private final KeyHandler keyHandler;
 
-    private int velocityY = 0;
+    private final BufferedImage idleSprite;
 
-    private boolean onGround = true;
+    private final int groundLevel;
 
-    private BufferedImage sprite;
-
-    // ===============================
+    // ==========================================
     // CONSTRUCTOR
-    // ===============================
+    // ==========================================
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
 
         this.gamePanel = gamePanel;
-
         this.keyHandler = keyHandler;
 
-        setX(100);
+        width = GameConfig.PLAYER_WIDTH;
+        height = GameConfig.PLAYER_HEIGHT;
 
-        setY(groundLevel);
+        speed = GameConfig.PLAYER_SPEED;
 
-        setWidth(GameConfig.PLAYER_WIDTH);
+        x = 100;
 
-        setHeight(GameConfig.PLAYER_HEIGHT);
+        groundLevel = GameConfig.GROUND_Y - height;
 
-        setSpeed(GameConfig.PLAYER_SPEED);
+        y = groundLevel;
 
-        getSolidArea().x = 8;
+        onGround = true;
 
-        getSolidArea().y = 8;
+        velocityY = 0;
 
-        getSolidArea().width = 48;
+        solidArea.x = 8;
+        solidArea.y = 8;
+        solidArea.width = 48;
+        solidArea.height = 56;
 
-        getSolidArea().height = 56;
+        idleSprite = AssetManager.getPlayerIdle();
 
     }
 
-    // ===============================
-    // GROUND
-    // ===============================
-
-    private final int groundLevel =
-            GameConfig.GROUND_Y - GameConfig.PLAYER_HEIGHT;
-
-    // ===============================
+    // ==========================================
     // UPDATE
-    // ===============================
+    // ==========================================
 
     public void update() {
 
@@ -77,29 +71,49 @@ public class Player extends Entity {
 
     }
 
-    // ===============================
+    // ==========================================
     // MOVEMENT
-    // ===============================
+    // ==========================================
 
     private void movement() {
 
+        moveLeft();
+
+        moveRight();
+
+    }
+
+    // ==========================================
+    // MOVE LEFT
+    // ==========================================
+
+    private void moveLeft() {
+
         if (keyHandler.leftPressed) {
 
-            setX(getX() - getSpeed());
-
-        }
-
-        if (keyHandler.rightPressed) {
-
-            setX(getX() + getSpeed());
+            x -= speed;
 
         }
 
     }
 
-    // ===============================
+    // ==========================================
+    // MOVE RIGHT
+    // ==========================================
+
+    private void moveRight() {
+
+        if (keyHandler.rightPressed) {
+
+            x += speed;
+
+        }
+
+    }
+
+    // ==========================================
     // JUMP
-    // ===============================
+    // ==========================================
 
     private void jump() {
 
@@ -113,19 +127,19 @@ public class Player extends Entity {
 
     }
 
-    // ===============================
+    // ==========================================
     // GRAVITY
-    // ===============================
+    // ==========================================
 
     private void gravity() {
 
         velocityY += GameConfig.GRAVITY;
 
-        setY(getY() + velocityY);
+        y += velocityY;
 
-        if (getY() >= groundLevel) {
+        if (y >= groundLevel) {
 
-            setY(groundLevel);
+            y = groundLevel;
 
             velocityY = 0;
 
@@ -135,27 +149,25 @@ public class Player extends Entity {
 
     }
 
-    // ===============================
+    // ==========================================
     // DRAW
-    // ===============================
+    // ==========================================
 
     public void draw(Graphics g) {
 
         g.drawImage(
 
-                AssetManager.getPlayerIdle(),
+                idleSprite,
 
-                getX(),
+                x,
 
-                getY(),
+                y,
 
-                getWidth(),
+                width,
 
-                getHeight(),
+                height,
 
-                null
-
-        );
+                null);
 
     }
 

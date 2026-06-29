@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import game.input.KeyHandler;
+import game.panel.GamePanel;
 import game.config.GameConfig;
 import game.util.AssetManager;
 import game.util.UtilityTool;
@@ -17,6 +18,8 @@ public class Player extends Entity {
 
     private final KeyHandler keyHandler;
 
+    private final GamePanel gamePanel;
+
     private int velocityY = 0;
 
     private boolean onGround = true;
@@ -27,13 +30,15 @@ public class Player extends Entity {
     // CONSTRUCTOR
     // ===============================
 
-    public Player(KeyHandler keyHandler) {
+    public Player(GamePanel gamePanel, KeyHandler keyHandler) {
+
+        this.gamePanel = gamePanel;
 
         this.keyHandler = keyHandler;
 
         setX(100);
 
-        setY(GameConfig.GROUND_Y);
+        setY(groundLevel);
 
         setWidth(GameConfig.PLAYER_WIDTH);
 
@@ -41,7 +46,22 @@ public class Player extends Entity {
 
         setSpeed(GameConfig.PLAYER_SPEED);
 
+        getSolidArea().x = 8;
+
+        getSolidArea().y = 8;
+
+        getSolidArea().width = 48;
+
+        getSolidArea().height = 56;
+
     }
+
+    // ===============================
+    // GROUND
+    // ===============================
+
+    private final int groundLevel =
+            GameConfig.GROUND_Y - GameConfig.PLAYER_HEIGHT;
 
     // ===============================
     // UPDATE
@@ -99,13 +119,16 @@ public class Player extends Entity {
 
     private void gravity() {
 
+        // Tambahkan gravitasi
         velocityY += GameConfig.GRAVITY;
 
+        // Geser posisi player
         setY(getY() + velocityY);
 
-        if (getY() >= GameConfig.GROUND_Y) {
+        // Cek apakah sudah menyentuh tanah
+        if (getY() > groundLevel) {
 
-            setY(GameConfig.GROUND_Y);
+            setY(groundLevel);
 
             velocityY = 0;
 

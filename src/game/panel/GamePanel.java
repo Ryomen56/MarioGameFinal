@@ -2,6 +2,7 @@ package game.panel;
 
 import game.entity.Player;
 import game.input.KeyHandler;
+import game.collision.CollisionChecker;
 import game.config.GameConfig;
 import game.tile.TileManager;
 
@@ -24,7 +25,24 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
     private Player player;
     private TileManager tileManager;
+    private CollisionChecker collisionChecker;
     private KeyHandler keyHandler;
+
+    // ===============================
+    // GETTER
+    // ===============================
+
+    public CollisionChecker getCollisionChecker(){
+
+    return collisionChecker;
+
+    }
+
+    public TileManager getTileManager(){
+
+        return tileManager;
+
+    }
 
     // ===============================
     // CONSTRUCTOR
@@ -52,7 +70,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileManager = new TileManager(this);
 
-        player = new Player(keyHandler);
+        collisionChecker = new CollisionChecker(this);
+
+        player = new Player(this, keyHandler);
 
     }
 

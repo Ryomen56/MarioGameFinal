@@ -17,9 +17,12 @@ public class TileManager {
 
     private final GamePanel gamePanel;
 
+    /**
+     * Menyimpan data map yang dibaca dari world01.txt
+     */
     private final int[][] map =
-        new int[GameConfig.MAX_SCREEN_ROW]
-               [GameConfig.MAX_SCREEN_COL];
+            new int[GameConfig.MAX_SCREEN_ROW]
+                [GameConfig.MAX_SCREEN_COL];
 
     // ==========================================
     // CONSTRUCTOR
@@ -34,48 +37,27 @@ public class TileManager {
     }
 
     // ==========================================
-    // DRAW
+    // DRAW MAP
     // ==========================================
 
     public void draw(Graphics g) {
 
-        for(int row = 0;
-                row < GameConfig.MAX_SCREEN_ROW;
-                row++){
+        for (int row = 0; row < GameConfig.MAX_SCREEN_ROW; row++) {
 
-            for(int column = 0;
-                    column < GameConfig.MAX_SCREEN_COL;
-                    column++){
+            for (int column = 0; column < GameConfig.MAX_SCREEN_COL; column++) {
 
-                int tile = map[row][column];
+                // Mengambil nomor tile dari map
+                int tileNumber = map[row][column];
 
-                if(tile == 1){
+                // Mengambil objek Tile sesuai nomor
+                Tile tile = AssetManager.getTile(tileNumber);
 
-                    g.drawImage(
-
-                            AssetManager
-                            .getGroundTile()
-                            .getImage(),
-
-                            column * GameConfig.TILE_SIZE,
-
-                            row * GameConfig.TILE_SIZE,
-
-                            GameConfig.TILE_SIZE,
-
-                            GameConfig.TILE_SIZE,
-
-                            null);
-
-                }
-
-                if(tile == 2){
+                // Jika tile ada, gambar ke layar
+                if (tile != null) {
 
                     g.drawImage(
 
-                            AssetManager
-                            .getGroundTile()
-                            .getImage(),
+                            tile.getImage(),
 
                             column * GameConfig.TILE_SIZE,
 

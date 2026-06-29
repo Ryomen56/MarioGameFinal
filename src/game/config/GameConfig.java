@@ -46,9 +46,9 @@ public final class GameConfig {
     // PLAYER
     // ===============================
 
-    public static final int PLAYER_WIDTH = TILE_SIZE;
+    public static final int PLAYER_WIDTH = 64;
 
-    public static final int PLAYER_HEIGHT = TILE_SIZE;
+    public static final int PLAYER_HEIGHT = 64;
 
     public static final int PLAYER_SPEED = 4;
 

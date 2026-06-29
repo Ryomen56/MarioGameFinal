@@ -1,10 +1,19 @@
 package game.entity;
 
+import java.awt.Rectangle;
 /**
  * Class induk untuk semua objek yang dapat muncul di dalam game.
  * Semua entity mempunyai posisi, ukuran, dan kecepatan.
  */
 public class Entity {
+    
+    // ===============================
+    // COLLISION
+    // ===============================
+
+    private Rectangle solidArea;
+
+    private boolean collisionOn = false;
 
     // ===========================
     // POSITION
@@ -25,6 +34,16 @@ public class Entity {
     // ===========================
 
     private int speed;
+
+    // ===========================
+    //  CONSTRUCTOR
+    // ===========================
+
+    public Entity() {
+
+    solidArea = new Rectangle();
+
+    }
 
     // ===========================
     // GETTER
@@ -50,6 +69,18 @@ public class Entity {
         return speed;
     }
 
+    public Rectangle getSolidArea() {
+
+        return solidArea;
+
+    }
+
+    public boolean isCollisionOn() {
+
+        return collisionOn;
+
+    }
+
     // ===========================
     // SETTER
     // ===========================
@@ -72,6 +103,18 @@ public class Entity {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public void setSolidArea(Rectangle solidArea) {
+
+        this.solidArea = solidArea;
+
+    }
+
+    public void setCollisionOn(boolean collisionOn) {
+
+        this.collisionOn = collisionOn;
+
     }
 
 }

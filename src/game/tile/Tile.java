@@ -43,7 +43,7 @@ public class Tile {
         return image;
     }
 
-    public boolean hasCollision() {
+    public boolean isCollision() {
         return collision;
     }
 

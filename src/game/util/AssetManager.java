@@ -19,7 +19,7 @@ public final class AssetManager {
     // TILE
     // ==========================================
 
-    private static Tile groundTile;
+    private static final Tile[] tiles = new Tile[20];
 
     // ==========================================
     // LOAD
@@ -44,21 +44,21 @@ public final class AssetManager {
 
     }
 
-    // ==========================================
-    // TILE
-    // ==========================================
-
     private static void loadTiles() {
 
-        groundTile = new Tile();
+    // ==========================================
+    // GROUND
+    // ==========================================
 
-        groundTile.setImage(
+        tiles[1] = new Tile();
+
+        tiles[1].setImage(
 
                 UtilityTool.loadImage(
 
                         "assets/AssetManager/tile/ground.png"));
 
-        groundTile.setCollision(true);
+        tiles[1].setCollision(true);
 
     }
 
@@ -72,9 +72,13 @@ public final class AssetManager {
 
     }
 
-    public static Tile getGroundTile() {
+    // ==========================================
+    // GET TILE
+    // ==========================================
 
-        return groundTile;
+    public static Tile getTile(int index){
+
+    return tiles[index];
 
     }
 

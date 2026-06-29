@@ -11,12 +11,6 @@ public final class UtilityTool {
     private UtilityTool() {
     }
 
-    /**
-     * Membaca gambar dari folder assets.
-     *
-     * @param path lokasi file
-     * @return BufferedImage
-     */
     public static BufferedImage loadImage(String path) {
 
         try {
@@ -27,7 +21,7 @@ public final class UtilityTool {
 
             throw new RuntimeException(
 
-                    "Gagal membaca gambar : " + path,
+                    "Tidak dapat membaca file:\n" + path,
 
                     e);
 

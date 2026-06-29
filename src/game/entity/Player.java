@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import game.input.KeyHandler;
 import game.config.GameConfig;
+import game.util.AssetManager;
 import game.util.UtilityTool;
 
 public class Player extends Entity {
@@ -39,8 +40,6 @@ public class Player extends Entity {
         setHeight(GameConfig.PLAYER_HEIGHT);
 
         setSpeed(GameConfig.PLAYER_SPEED);
-
-        loadImage();
 
     }
 
@@ -116,16 +115,6 @@ public class Player extends Entity {
 
     }
 
-     // ===============================
-    // GAMBAR PLAYER
-    // ===============================
-    private void loadImage() {
-
-        sprite = UtilityTool.loadImage(
-        "assets/images/player/player_idle.png");
-
-    }
-
     // ===============================
     // DRAW
     // ===============================
@@ -134,7 +123,7 @@ public class Player extends Entity {
 
         g.drawImage(
 
-                sprite,
+                AssetManager.getPlayerIdle(),
 
                 getX(),
 

@@ -4,12 +4,16 @@ import javax.swing.JFrame;
 
 import game.panel.GamePanel;
 
+import game.util.AssetManager;
+
 /**
  * Titik awal program.
  */
 public class Main {
 
     public static void main(String[] args){
+
+        AssetManager.loadAll();
 
         JFrame window = new JFrame();
 

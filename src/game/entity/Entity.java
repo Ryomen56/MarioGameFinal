@@ -1,53 +1,66 @@
 package game.entity;
 
 import java.awt.Rectangle;
+
 /**
- * Class induk untuk semua objek yang dapat muncul di dalam game.
- * Semua entity mempunyai posisi, ukuran, dan kecepatan.
+ * Parent class untuk semua object yang ada di dalam game.
+ *
+ * Semua object seperti:
+ * - Player
+ * - Enemy
+ * - Coin
+ * - NPC
+ * - Object
+ *
+ * akan mewarisi class ini.
  */
-public class Entity {
-    
-    // ===============================
-    // COLLISION
-    // ===============================
+public abstract class Entity {
 
-    private Rectangle solidArea;
-
-    private boolean collisionOn = false;
-
-    // ===========================
+    // ==========================================
     // POSITION
-    // ===========================
+    // ==========================================
 
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
-    // ===========================
+    // ==========================================
     // SIZE
-    // ===========================
+    // ==========================================
 
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
 
-    // ===========================
-    // SPEED
-    // ===========================
+    // ==========================================
+    // MOVEMENT
+    // ==========================================
 
-    private int speed;
+    protected int speed;
 
-    // ===========================
-    //  CONSTRUCTOR
-    // ===========================
+    protected int velocityY;
+
+    protected boolean onGround;
+
+    // ==========================================
+    // COLLISION
+    // ==========================================
+
+    protected Rectangle solidArea;
+
+    protected boolean collisionOn;
+
+    // ==========================================
+    // CONSTRUCTOR
+    // ==========================================
 
     public Entity() {
 
-    solidArea = new Rectangle();
+        solidArea = new Rectangle();
 
     }
 
-    // ===========================
+    // ==========================================
     // GETTER
-    // ===========================
+    // ==========================================
 
     public int getX() {
         return x;
@@ -69,21 +82,25 @@ public class Entity {
         return speed;
     }
 
+    public int getVelocityY() {
+        return velocityY;
+    }
+
+    public boolean isOnGround() {
+        return onGround;
+    }
+
     public Rectangle getSolidArea() {
-
         return solidArea;
-
     }
 
     public boolean isCollisionOn() {
-
         return collisionOn;
-
     }
 
-    // ===========================
+    // ==========================================
     // SETTER
-    // ===========================
+    // ==========================================
 
     public void setX(int x) {
         this.x = x;
@@ -105,16 +122,20 @@ public class Entity {
         this.speed = speed;
     }
 
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public void setOnGround(boolean onGround) {
+        this.onGround = onGround;
+    }
+
     public void setSolidArea(Rectangle solidArea) {
-
         this.solidArea = solidArea;
-
     }
 
     public void setCollisionOn(boolean collisionOn) {
-
         this.collisionOn = collisionOn;
-
     }
 
 }

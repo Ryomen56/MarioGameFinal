@@ -37,16 +37,6 @@ public class TileManager {
     }
 
     // ==========================================
-    // GET MAP
-    // ==========================================
-
-    public int[][] getMap() {
-
-        return map;
-
-    }
-
-    // ==========================================
     // DRAW MAP
     // ==========================================
 
@@ -131,6 +121,22 @@ public class TileManager {
             e.printStackTrace();
 
         }
+
+    }
+
+    // ==========================================
+    // GET MAP
+    // ==========================================
+
+    /**
+     * Mengembalikan data map yang telah dibaca
+     * dari file world01.txt.
+     *
+     * @return array 2 dimensi map
+     */
+    public int[][] getMap() {
+
+        return map;
 
     }
 

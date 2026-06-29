@@ -67,15 +67,11 @@ public class Player extends Entity {
     // UPDATE
     // ===============================
 
-    public void update(){
+    public void update() {
 
         movement();
 
         jump();
-
-        gamePanel
-                .getCollisionChecker()
-                .checkTile(this);
 
         gravity();
 
@@ -123,31 +119,11 @@ public class Player extends Entity {
 
     private void gravity() {
 
-        // Tambahkan gravitasi
         velocityY += GameConfig.GRAVITY;
 
-        // Geser posisi player
-        if(!isCollisionOn()){
+        setY(getY() + velocityY);
 
-        setY(
-
-                getY()
-
-                + velocityY
-
-        );
-
-        }
-        else{
-
-            velocityY = 0;
-
-            onGround = true;
-
-        }
-
-        // Cek apakah sudah menyentuh tanah
-        if (getY() > groundLevel) {
+        if (getY() >= groundLevel) {
 
             setY(groundLevel);
 

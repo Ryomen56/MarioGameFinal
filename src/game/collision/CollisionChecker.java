@@ -62,6 +62,22 @@ public class CollisionChecker {
         int bottomRow =
                 bottomWorldY / GameConfig.TILE_SIZE;
 
+        // =====================================
+        // BOUNDARY CHECK
+        // =====================================
+
+        if (leftColumn < 0) {
+            leftColumn = 0;
+        }
+
+        if (rightColumn >= GameConfig.MAX_SCREEN_COL) {
+            rightColumn = GameConfig.MAX_SCREEN_COL - 1;
+        }
+
+        if (bottomRow >= GameConfig.MAX_SCREEN_ROW) {
+            bottomRow = GameConfig.MAX_SCREEN_ROW - 1;
+        }
+
         // ===============================
         // Ambil tile
         // ===============================

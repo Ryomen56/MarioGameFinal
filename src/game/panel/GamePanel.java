@@ -3,6 +3,7 @@ package game.panel;
 import game.entity.Player;
 import game.input.KeyHandler;
 import game.config.GameConfig;
+import game.tile.TileManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,6 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private Player player;
+    private TileManager tileManager;
     private KeyHandler keyHandler;
 
     // ===============================
@@ -47,6 +49,8 @@ public class GamePanel extends JPanel implements Runnable {
         keyHandler = new KeyHandler();
 
         addKeyListener(keyHandler);
+
+        tileManager = new TileManager(this);
 
         player = new Player(keyHandler);
 
@@ -117,14 +121,24 @@ public class GamePanel extends JPanel implements Runnable {
     // ===============================
 
     @Override
-        protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
 
-            super.paintComponent(g);
+        super.paintComponent(g);
 
-            player.draw(g);
+        // ==================================
+        // TILE
+        // ==================================
 
-            g.dispose();
+        tileManager.draw(g);
 
-        }
+        // ==================================
+        // PLAYER
+        // ==================================
+
+        player.draw(g);
+
+        g.dispose();
+
+    }
 
 }

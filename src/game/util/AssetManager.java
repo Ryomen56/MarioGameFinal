@@ -40,7 +40,7 @@ public final class AssetManager {
     private static void loadPlayer() {
 
         playerIdle = UtilityTool.loadImage(
-                "assets/images/player/player_idle.png");
+                "assets/AssetManager/player/player_idle.png");
 
     }
 
@@ -56,7 +56,7 @@ public final class AssetManager {
 
                 UtilityTool.loadImage(
 
-                        "assets/images/tile/ground.png"));
+                        "assets/AssetManager/tile/ground.png"));
 
         groundTile.setCollision(true);
 
